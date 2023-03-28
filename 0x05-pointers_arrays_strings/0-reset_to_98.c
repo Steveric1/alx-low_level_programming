@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * reset_to_98: function that takes in a pointer to an int
- * @*n: variable to be updated
- *
- * Return: Always 0.
- */
+*  reset_to_98 - takes the pointer and updates the value
+*  @n: int to check
+*  Owned By steveric1
+*  Return: 0 is success
+*/
 void reset_to_98(int *n)
 {
 	*n = 98;
