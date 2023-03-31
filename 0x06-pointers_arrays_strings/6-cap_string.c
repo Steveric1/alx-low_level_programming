@@ -20,7 +20,7 @@ char *cap_string(char *str)
 			{
 				for (j = 0; j <= 12; j++)
 				{
-					if (*(str + i - 1) == a[j])
+					if (a[j] == *(str + i - 1))
 						*(str + i) -= 'a' - 'A';
 				}
 			}
@@ -29,4 +29,3 @@ char *cap_string(char *str)
 	}
 	return (str);
 }
-
