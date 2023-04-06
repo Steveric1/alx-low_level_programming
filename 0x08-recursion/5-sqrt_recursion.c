@@ -13,7 +13,7 @@ int check(int n, int i)
 	if (i * i > n)
 		return (-1);
 	else if (i * i == n)
-		return (n);
+		return (i);
 	return (check(n, i + 1));
 }
 
