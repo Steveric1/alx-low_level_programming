@@ -9,23 +9,19 @@
  * Return: 0 on success
  */
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int i, mul;
+	int x, y;
 
-	if (argc > 1)
+	if (argc < 3)
 	{
-		mul = 1;
-
-		for (i = 1; i < argc; i++)
-		{
-			mul *= atoi(argv[i]);
-		}
-		printf("%d\n", mul);
-	}
-	else
-	{
-		printf("error\n");
+		printf("Error\n");
 		return (1);
 	}
+
+	x = atoi(argv[1]);
+	y = atoi(argv[2]);
+	printf("%d\n", x * Y);
+
+	return (0);
 }
