@@ -24,13 +24,13 @@ int _sqrt_recursion(int n)
 int calculateSqrt(int n, int x, int y);
 int calculateSqrt(int n, int x, int y)
 {
+	int mid = x + (y - x) / 2;
+	int square = mid * mid;
+
 	if (x > y)
 	{
 		return (-1);
 	}
-
-	int mid = x + (y - x) / 2;
-	int square = mid * mid;
 
 	if (square == n)
 	{
