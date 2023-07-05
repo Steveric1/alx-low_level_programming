@@ -25,7 +25,10 @@ int calculateSqrt(int n, int x, int y);
 int calculateSqrt(int n, int x, int y)
 {
 	if (x > y)
+	{
 		return (-1);
+	}
+
 	int mid = x + (y - x) / 2;
 	int square = mid * mid;
 
