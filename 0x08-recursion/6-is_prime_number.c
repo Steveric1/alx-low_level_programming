@@ -11,7 +11,7 @@ int checkPrime(int a, int b)
 {
 	if (b < 2 || b % a == 0)
 		return (0);
-	else if (a > b/2)
+	else if (a > b / 2)
 		return (1);
 	else
 		return (checkPrime(a + 1, b));
@@ -22,7 +22,6 @@ int checkPrime(int a, int b)
  * @n: number
  * Return: 1 if is prime 0 otherwise
  */
-
 int is_prime_number(int n)
 {
 	if (n == 2)
