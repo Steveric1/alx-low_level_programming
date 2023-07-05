@@ -22,7 +22,7 @@ int _sqrt_recursion(int n)
  * @y: end
  * Return: end
  */
-
+int calculateSqrt(int n, int x, int y);
 int calculateSqrt(int n, int x, int y)
 {
 	if (x <= y)
