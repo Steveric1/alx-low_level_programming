@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
 		if (*flag)
 		{
-			printf("error\n");
+			printf("Error\n");
 			return (10);
 		}
 
