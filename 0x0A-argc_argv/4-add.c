@@ -10,7 +10,8 @@
 
 int main(int argc, char **argv)
 {
-	int sum = 0, i;
+	int sum = 0, i, n;
+	char *flag;
 
 	if (argc == 1)
 	{
@@ -18,22 +19,17 @@ int main(int argc, char **argv)
 		return (0);
 	}
 
-	for (i = 1; i < argc; i++)
+	for (i = 1; argv[i]; i++)
 	{
-		char *arg = argv[i];
-		int j = 0;
+		n = strtol(argv[i], &flag, 10);
 
-		while (arg[j] != '\0')
+		if (*flag)
 		{
-			if (arg[j] < '0' || arg[j] > '9')
-			{
-				printf("error\n");
-				return (1);
-			}
-			j++;
+			printf("error\n");
+			return (10);
 		}
 
-		sum += atoi(arg);
+		sum += n;
 	}
 
 	printf("%d\n", sum);
