@@ -28,7 +28,8 @@ char *_strdup(char *str)
 	if (str == NULL)
 		return (NULL);
 
-	int len = _strlen(str), i;
+	int len = _strlen(str);
+	int i;
 	char *str2 = (char *)malloc((len + 1));
 
 	if (str2 == NULL)
