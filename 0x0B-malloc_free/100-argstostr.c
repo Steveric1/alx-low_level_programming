@@ -23,7 +23,7 @@ char *argstostr(int ac, char **av)
 		length += strlen(av[i]) + 1;
 	}
 
-	concatenate = (char *)malloc(length * sizeof(char));
+	concatenate = (char *)malloc(length * sizeof(char) + 1);
 
 	if (concatenate == NULL)
 		return (NULL);
