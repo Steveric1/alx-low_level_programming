@@ -1,22 +1,22 @@
 #include "main.h"
 
+
 /**
  * my_memset - function that set memory base on bytes
  * @ptr: pointer
  * @value: value
- * @size: size of bytes
+ * @size: size
  *
  * Return: pointer
  */
 
-char my_memset(void *ptr, int value, size_t num)
+void my_memset(void *ptr, int value, size_t size)
 {
 	unsigned char *p = (unsigned char *)ptr;
 	size_t i;
 
 	for (i = 0; i < num; i++)
 		p[i] = (unsigned char)value;
-	return (ptr);
 }
 
 /**
@@ -35,7 +35,7 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 		return (NULL);
 
 	ptr = malloc(nmemb * size);
-	if(ptr == NULL)
+	if (ptr == NULL)
 		return (NULL);
 	my_memset(ptr, 0, nmemb * size);
 
