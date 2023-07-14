@@ -10,7 +10,7 @@
  * Return: pointer
  */
 
-void my_memset(void *ptr, int value, size_t size)
+void *my_memset(void *ptr, int value, size_t size)
 {
 	unsigned char *p = (unsigned char *)ptr;
 	size_t i;
