@@ -1,8 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <ctype.h>
-#include <string.h>
 
 /**
  * is_digit - digit function
@@ -52,9 +50,9 @@ int validateArgument(int argc, char *argv[])
 
 	for (i = 1; i < argc; i++)
 	{
-		for (j = 0; j < strlen(argv[i]); j++)
+		for (j = 0; j < str_len(argv[i]); j++)
 		{
-			if (!isdigit(argv[i][j]))
+			if (!is_digit(argv[i][j]))
 			{
 				printf("Error\n");
 				exit(0);
