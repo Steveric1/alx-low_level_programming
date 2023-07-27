@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * size_t print_list - print all element
+ * print_list - prints all element in the link_t
  * @h: head
  *
  * Return: count_node
