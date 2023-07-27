@@ -9,7 +9,8 @@
 
 size_t print_list(const list_t *h)
 {
-	const list_t *ptr = h;
+	const list_t *ptr = malloc(sizeof(list_t));
+	ptr = h;
 	size_t count_node = 0;
 
 	while (ptr != NULL)
