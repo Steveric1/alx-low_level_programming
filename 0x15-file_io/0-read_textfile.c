@@ -27,14 +27,14 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	{
 		chunk_size = letters < sizeof(buffer) ? letters : sizeof(buffer);
 		r = read(fileDescriptor, buffer, chunk_size);
-		
+
 		if (r == 0)
 			break;
 		w = write(STDOUT_FILENO, buffer, r);
 		if (w != r)
 		{
 			close(fileDescriptor);
-			return total_r;
+			return (total_r);
 		}
 
 		total_r += r;
