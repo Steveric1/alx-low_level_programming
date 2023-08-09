@@ -93,11 +93,13 @@ int main(int argc, char **argv)
 	ssize_t r, w;
 	int fd_from, fd_to, close_from, close_to;
 	char buffer[1024];
+	mode_t file_perm;
 
 	error_97(argc);
 	fd_from = open(argv[1], O_RDONLY);
 	error_98((ssize_t)fd_from, argv[1], -1, -1);
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	file_perm = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, file_perm);
 	error_98((ssize_t)fd_to, argv[2], fd_from, -1);
 
 	r = 1024;
