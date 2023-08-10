@@ -18,10 +18,10 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident);
 void close_elf(int elf);
 
 /**
- * check_elf - Checks if a file is an ELF file.
- * @e_ident: A pointer to an array containing the ELF magic numbers.
+ * check_elf - check if a file is an ELF file
+ * @e_ident: a pointer to an array of ELF
  *
- * Description: If the file is not an ELF file - exit code 98.
+ * Description: if the file is not ELF file exit with error 98
  */
 void check_elf(unsigned char *e_ident)
 {
@@ -41,22 +41,22 @@ void check_elf(unsigned char *e_ident)
 }
 
 /**
- * print_magic - Prints the magic numbers of an ELF header.
- * @e_ident: A pointer to an array containing the ELF magic numbers.
+ * print_magic - print magic number of elf file
+ * @e_ident: a pointer to an array containing the magic number
  *
- * Description: Magic numbers are separated by spaces.
+ * Description: magic number seperated by space and newline
  */
 void print_magic(unsigned char *e_ident)
 {
-	int index;
+	int i;
 
-	printf("  Magic:   ");
+	printf(" Magic: ");
 
-	for (index = 0; index < EI_NIDENT; index++)
+	for (i = 0; i < EI_NIDENT; i++)
 	{
-		printf("%02x", e_ident[index]);
+		printf("%02x", e_ident[i]);
 
-		if (index == EI_NIDENT - 1)
+		if (i == EI_NIDENT - 1)
 			printf("\n");
 		else
 			printf(" ");
@@ -64,27 +64,21 @@ void print_magic(unsigned char *e_ident)
 }
 
 /**
- * print_class - Prints the class of an ELF header.
- * @e_ident: A pointer to an array containing the ELF class.
+ * print_class - print class of an elf file
+ * @e_ident: a pointer to an array containing the class number
  */
 void print_class(unsigned char *e_ident)
 {
-	printf("  Class:                             ");
+	printf(" Class:          ");
 
-	switch (e_ident[EI_CLASS])
-	{
-	case ELFCLASSNONE:
+	if (e_ident[EI_CLASS] == ELFCLASSNONE)
 		printf("none\n");
-		break;
-	case ELFCLASS32:
+	else if (e_ident[EI_CLASS] == ELFCLASS32)
 		printf("ELF32\n");
-		break;
-	case ELFCLASS64:
+	else if (e_ident[EI_CLASS] == ELFCLASS64)
 		printf("ELF64\n");
-		break;
-	default:
+	else
 		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
-	}
 }
 
 /**
@@ -93,22 +87,16 @@ void print_class(unsigned char *e_ident)
  */
 void print_data(unsigned char *e_ident)
 {
-	printf("  Data:                              ");
+	printf(" Data:                 ");
 
-	switch (e_ident[EI_DATA])
-	{
-	case ELFDATANONE:
+	if (e_ident[EI_DATA] == ELFDATANONE)
 		printf("none\n");
-		break;
-	case ELFDATA2LSB:
-		printf("2's complement, little endian\n");
-		break;
-	case ELFDATA2MSB:
-		printf("2's complement, big endian\n");
-		break;
-	default:
-		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
-	}
+	else if (e_ident[EI_DATA] == ELFDATA2LSB)
+		printf("2's complement little endian\n");
+	else if (e_ident[EI_DATA] == ELFDATA2MSB)
+		printf("2's complement big endian\n");
+	else
+		printf("<unkownn: %x>\n", e_ident[EI_DATA]);
 }
 
 /**
@@ -120,15 +108,10 @@ void print_version(unsigned char *e_ident)
 	printf("  Version:                           %d",
 	       e_ident[EI_VERSION]);
 
-	switch (e_ident[EI_VERSION])
-	{
-	case EV_CURRENT:
+	if (e_ident[EI_VERSION] == EV_CURRENT)
 		printf(" (current)\n");
-		break;
-	default:
+	else
 		printf("\n");
-		break;
-	}
 }
 
 /**
@@ -196,27 +179,27 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 		e_type >>= 8;
 
-	printf("  Type:                              ");
+	printf(" Type:                 ");
 
 	switch (e_type)
 	{
-	case ET_NONE:
-		printf("NONE (None)\n");
-		break;
-	case ET_REL:
-		printf("REL (Relocatable file)\n");
-		break;
-	case ET_EXEC:
-		printf("EXEC (Executable file)\n");
-		break;
-	case ET_DYN:
-		printf("DYN (Shared object file)\n");
-		break;
-	case ET_CORE:
-		printf("CORE (Core file)\n");
-		break;
-	default:
-		printf("<unknown: %x>\n", e_type);
+		case ET_NONE:
+			printf("NONE (None)\n");
+			break;
+		case ET_REL:
+			printf("REL (Relocatable file)\n");
+			break;
+		case ET_EXEC:
+			printf("EXEC (Executable file)\n");
+			break;
+		case ET_DYN:
+			printf("DYN (Shared object file)\n");
+			break;
+		case ET_CORE:
+			printf("CORE (Core file)\n");
+			break;
+		default:
+			printf("<unknown: %x>\n", e_type);
 	}
 }
 
@@ -258,6 +241,7 @@ void close_elf(int elf)
 		exit(98);
 	}
 }
+
 
 /**
  * main - Displays the information contained in the
