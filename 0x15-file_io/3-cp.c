@@ -1,14 +1,14 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * error_97 - check if argument is not correct
- * @argc: number of argument
+ * check97 - checks for the correct number of arguments
+ * @argc: number of arguments
  *
- * Return: nothing
+ * Return: void
  */
-
-void error_97(int argc)
+void check97(int argc)
 {
 	if (argc != 3)
 	{
@@ -18,20 +18,19 @@ void error_97(int argc)
 }
 
 /**
- * error_98 - if file_from does not exit
- * @check: check
- * @file_from: file
- * @fd_from: fd_from
- * @fd_to: fd_to
+ * check98 - checks that file_from exists and can be read
+ * @check: checks if true of false
+ * @file: file_from name
+ * @fd_from: file descriptor of file_from, or -1
+ * @fd_to: file descriptor of file_to, or -1
  *
- * Return: nothing
+ * Return: void
  */
-
-void error_98(ssize_t check, char *file_from, int fd_from, int fd_to)
+void check98(ssize_t check, char *file, int fd_from, int fd_to)
 {
 	if (check == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file);
 		if (fd_from != -1)
 			close(fd_from);
 		if (fd_to != -1)
@@ -41,20 +40,19 @@ void error_98(ssize_t check, char *file_from, int fd_from, int fd_to)
 }
 
 /**
- * error_99 - if write to file_to fails
- * @check: check
- * @file_to: file to
- * @fd_from: fd_from
- * @fd_to: fd_to
+ * check99 - checks that file_to was created and/or can be written to
+ * @check: checks if true of false
+ * @file: file_to name
+ * @fd_from: file descriptor of file_from, or -1
+ * @fd_to: file descriptor of file_to, or -1
  *
- * Return: nothing
+ * Return: void
  */
-
-void error_99(ssize_t check, char *file_to, int fd_from, int fd_to)
+void check99(ssize_t check, char *file, int fd_from, int fd_to)
 {
 	if (check == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
 		if (fd_from != -1)
 			close(fd_from);
 		if (fd_to != -1)
@@ -64,14 +62,13 @@ void error_99(ssize_t check, char *file_to, int fd_from, int fd_to)
 }
 
 /**
- * error_100 - can't close file descriptor
- * @check: check
+ * check100 - checks that file descriptors were closed properly
+ * @check: checks if true or false
  * @fd: file descriptor
  *
- * Return: nothing
+ * Return: void
  */
-
-void error_100(int check, int fd)
+void check100(int check, int fd)
 {
 	if (check == -1)
 	{
@@ -79,44 +76,39 @@ void error_100(int check, int fd)
 		exit(100);
 	}
 }
-
 /**
- * main - copy file_from to file_to
- * @argc: number of argument
- * @argv: array of argument
+ * main - opies the content of a file to another file.
+ * @argc: number of arguments passed
+ * @argv: array of pointers to the arguments
  *
  * Return: 0 on success
  */
-
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	ssize_t r, w;
-	int fd_from, fd_to, close_from, close_to;
+	int fd_from, fd_to, close_to, close_from;
+	ssize_t lenr, lenw;
 	char buffer[1024];
 	mode_t file_perm;
 
-	error_97(argc);
+	check97(argc);
 	fd_from = open(argv[1], O_RDONLY);
-	error_98((ssize_t)fd_from, argv[1], -1, -1);
+	check98((ssize_t)fd_from, argv[1], -1, -1);
 	file_perm = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, file_perm);
-	error_98((ssize_t)fd_to, argv[2], fd_from, -1);
-
-	r = 1024;
-	while (r == 1024)
+	check99((ssize_t)fd_to, argv[2], fd_from, -1);
+	lenr = 1024;
+	while (lenr == 1024)
 	{
-		r = read(fd_from, buffer, 1024);
-		error_98(r, argv[1], fd_from, fd_to);
-		w = write(fd_to, buffer, r);
-		if (w != r)
-			w = -1;
-		error_99(w, argv[2], fd_from, fd_to);
+		lenr = read(fd_from, buffer, 1024);
+		check98(lenr, argv[1], fd_from, fd_to);
+		lenw = write(fd_to, buffer, lenr);
+		if (lenw != lenr)
+			lenw = -1;
+		check99(lenw, argv[2], fd_from, fd_to);
 	}
-
 	close_to = close(fd_to);
 	close_from = close(fd_from);
-	error_100(close_to, fd_to);
-	error_100(close_from, fd_from);
+	check100(close_to, fd_to);
+	check100(close_from, fd_from);
 	return (0);
 }
-
